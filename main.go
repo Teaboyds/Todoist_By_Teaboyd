@@ -1,16 +1,21 @@
 package main
 
 import (
+	"log"
+
+	"github.com/Teaboyds/Todoist_By_Teaboyd/database"
 	"github.com/gofiber/fiber/v2"
 )
 
 func main() {
 
+	database.ConnectDB()
+
 	app := fiber.New()
 
-	app.Get("/", func(c *fiber.Ctx) error {
+	app.Get("/test", func(c *fiber.Ctx) error {
 		return c.SendString("hello patiphan")
 	})
 
-	app.Listen(":9500")
+	log.Fatal(app.Listen(":9500"))
 }
