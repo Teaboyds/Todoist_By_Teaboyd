@@ -6,7 +6,6 @@ import (
 	"os"
 	"time"
 
-	"github.com/Teaboyds/Todoist_By_Teaboyd/models"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
@@ -20,7 +19,7 @@ const (
 	dbname   = "TodoList"
 )
 
-func ConnectDB() {
+func ConnectDB() *gorm.DB {
 	dns := fmt.Sprintf("host=%s port=%d user=%s "+
 		"password=%s dbname=%s sslmode=disable",
 		host, port, user, password, dbname)
@@ -42,5 +41,6 @@ func ConnectDB() {
 		panic("failed to connect to database")
 	}
 
-	db.AutoMigrate(models.User{}, models.Project{}, models.Task{})
+	return db
+
 }
